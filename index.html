@@ -98,6 +98,14 @@
                 </div>
             </a>
 
+            <!-- Botón Volver (Desktop) -->
+            <div class="hidden lg:flex flex-1 justify-center px-4">
+                <a href="https://estudioparedesbenedetti.com.ar" class="px-6 py-2.5 bg-legal-gold hover:bg-legal-gold-light text-white font-bold rounded-sm shadow-md transition-all transform hover:-translate-y-0.5 text-[10px] tracking-[0.15em] uppercase text-center flex items-center gap-2">
+                    <i data-lucide="home" class="w-3.5 h-3.5"></i>
+                    VOLVER A LA PÁGINA PRINCIPAL
+                </a>
+            </div>
+
             <nav class="hidden lg:flex items-center space-x-8 xl:space-x-10">
                 <a href="https://estudioparedesbenedetti.com.ar#servicios" class="text-xs uppercase tracking-widest font-bold text-legal-blue/70 dark:text-gray-400 hover:text-legal-gold dark:hover:text-legal-gold transition-colors">Servicios</a>
                 <a href="https://estudioparedesbenedetti.com.ar#contacto" class="text-xs uppercase tracking-widest font-bold text-legal-blue/70 dark:text-gray-400 hover:text-legal-gold dark:hover:text-legal-gold transition-colors">Contacto</a>
@@ -120,7 +128,7 @@
         </div>
 
         <div x-show="mobileMenuOpen" x-cloak x-transition class="lg:hidden absolute top-full left-0 w-full bg-white dark:bg-legal-blue border-b border-gray-100 dark:border-gray-800 shadow-2xl py-6 px-6 flex flex-col space-y-4">
-            <a href="https://estudioparedesbenedetti.com.ar" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white border-b border-gray-50 dark:border-gray-800 pb-2">Inicio</a>
+            <a href="https://estudioparedesbenedetti.com.ar" @click="mobileMenuOpen = false" class="text-sm font-bold bg-legal-gold text-white py-3 px-4 rounded-sm text-center tracking-widest uppercase mb-2">VOLVER A PAREDES BENEDETTI</a>
             <a href="https://estudioparedesbenedetti.com.ar#servicios" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white border-b border-gray-50 dark:border-gray-800 pb-2">Servicios</a>
             <a href="https://estudioparedesbenedetti.com.ar#contacto" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white pb-2">Contacto</a>
         </div>
@@ -239,6 +247,13 @@
                                 <div class="p-3 rounded-full bg-white/5 text-legal-gold shrink-0"><i data-lucide="mail" class="w-5 h-5"></i></div>
                                 <span class="break-all">iparedesbenedetti@gmail.com</span>
                             </div>
+                            <!-- Link a Honorarios -->
+                            <div class="flex justify-center lg:justify-start pt-2">
+                                <a href="https://www.abogado.org.ar/aranceles.php" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 px-6 py-3 bg-white/5 border border-legal-gold/30 hover:bg-legal-gold/10 text-legal-gold rounded-sm transition-all group max-w-xs text-center text-[10px] md:text-xs">
+                                    <i data-lucide="external-link" class="w-4 h-4 group-hover:scale-110 transition-transform shrink-0"></i>
+                                    <span class="font-bold tracking-widest uppercase">Honorarios Colegio de Abogados de Córdoba</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -285,12 +300,6 @@
             <p class="text-[10px] md:text-xs text-gray-600 tracking-widest">
                 &copy; <span x-text="new Date().getFullYear()"></span> TODOS LOS DERECHOS RESERVADOS. CÓRDOBA, ARGENTINA.
             </p>
-            <div class="pt-8 flex justify-center">
-                <a href="https://www.abogado.org.ar/aranceles.php" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 px-6 py-3 bg-white/5 border border-legal-gold/30 hover:bg-legal-gold/10 text-legal-gold rounded-sm transition-all group max-w-xs text-center text-xs">
-                    <i data-lucide="external-link" class="w-4 h-4 group-hover:scale-110 transition-transform shrink-0"></i>
-                    <span class="font-bold tracking-widest uppercase">Honorarios Colegio de Abogados de Córdoba</span>
-                </a>
-            </div>
         </div>
     </footer>
 
