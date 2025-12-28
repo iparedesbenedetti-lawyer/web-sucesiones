@@ -1,20 +1,306 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="scroll-smooth" x-data="{ darkMode: localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches) }" :class="{ 'dark': darkMode }" x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sucesiones | Estudio Paredes Benedetti</title>
+    <title>Sucesiones | Estudio Jurídico Paredes Benedetti</title>
+    <meta name="description" content="Gestión integral y eficiente de sucesiones, declaratoria de herederos y partición de bienes en Córdoba. Asesoramiento legal experto para proteger su patrimonio." />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'legal-blue': '#0f172a',
+                        'legal-gold': '#926a2d',
+                        'legal-gold-light': '#b38b4d',
+                        'legal-bg': '#f8fafc',
+                        'legal-dark-bg': '#0B1120',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js" defer></script>
+    
+    <style>
+        [x-cloak] { display: none !important; }
+        .glass-effect {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #926a2d, #b38b4d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        @media (max-width: 640px) {
+            .calendly-inline-widget {
+                height: 450px !important;
+            }
+        }
+    </style>
+
+    <script>
+        function contactForm() {
+            return {
+                activeTab: 'message',
+                formData: {
+                    name: '',
+                    email: '',
+                    phone: '',
+                    message: ''
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-[#f8fafc] text-[#0f172a] font-sans flex items-center justify-center min-h-screen">
-    <div class="max-w-lg text-center p-8 bg-white shadow-2xl rounded-sm border-t-4 border-[#926a2d]">
-        <h1 class="text-3xl font-serif font-bold mb-4">Especialistas en Sucesiones</h1>
-        <p class="text-gray-600 mb-8 text-sm leading-relaxed">
-            Tramitación de declaratorias de herederos y partición patrimonial eficiente en Córdoba.
-        </p>
-        <a href="https://estudioparedesbenedetti.com.ar#contacto" class="inline-block px-8 py-3 bg-[#0f172a] text-white text-xs font-bold tracking-widest uppercase hover:bg-[#926a2d] transition-colors">
-            INICIAR CONSULTA
-        </a>
-    </div>
+<body class="bg-legal-bg text-legal-blue dark:bg-legal-dark-bg dark:text-gray-200 transition-colors duration-300 font-sans overflow-x-hidden">
+
+    <header 
+        x-data="{ isScrolled: false, mobileMenuOpen: false }" 
+        @scroll.window="isScrolled = (window.pageYOffset > 50)"
+        class="fixed top-0 w-full z-50 transition-all duration-500"
+        :class="isScrolled ? 'bg-white/90 dark:bg-legal-blue/95 glass-effect shadow-lg py-2 md:py-3' : 'bg-transparent py-4 md:py-6'"
+    >
+        <div class="container mx-auto px-4 sm:px-6 flex justify-between items-center">
+            <a href="https://estudioparedesbenedetti.com.ar" class="flex items-center gap-2 md:gap-3 group shrink-0">
+                <div class="w-8 h-8 md:w-10 md:h-10 bg-legal-gold rounded-sm flex items-center justify-center text-white font-serif font-bold text-lg md:text-xl shadow-lg transition-colors duration-300">
+                    PB
+                </div>
+                <div>
+                    <h1 class="font-serif text-lg md:text-xl font-bold leading-none text-legal-blue dark:text-white group-hover:text-legal-gold transition-colors duration-300">
+                        Paredes Benedetti
+                    </h1>
+                    <p class="text-[8px] md:text-[10px] uppercase tracking-[0.2em] text-legal-gold font-bold mt-0.5 md:mt-1">Estudio Jurídico</p>
+                </div>
+            </a>
+
+            <nav class="hidden lg:flex items-center space-x-8 xl:space-x-10">
+                <a href="https://estudioparedesbenedetti.com.ar#servicios" class="text-xs uppercase tracking-widest font-bold text-legal-blue/70 dark:text-gray-400 hover:text-legal-gold dark:hover:text-legal-gold transition-colors">Servicios</a>
+                <a href="https://estudioparedesbenedetti.com.ar#contacto" class="text-xs uppercase tracking-widest font-bold text-legal-blue/70 dark:text-gray-400 hover:text-legal-gold dark:hover:text-legal-gold transition-colors">Contacto</a>
+                <button @click="darkMode = !darkMode" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors text-legal-blue dark:text-legal-gold" aria-label="Cambiar tema">
+                    <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5"></i>
+                    <i x-show="darkMode" data-lucide="sun" class="w-5 h-5" x-cloak></i>
+                </button>
+            </nav>
+
+            <div class="lg:hidden flex items-center gap-2">
+                <button @click="darkMode = !darkMode" class="text-legal-blue dark:text-legal-gold p-2" aria-label="Cambiar tema">
+                    <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5"></i>
+                    <i x-show="darkMode" data-lucide="sun" class="w-5 h-5" x-cloak></i>
+                </button>
+                <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-legal-blue dark:text-white p-2" aria-label="Menu">
+                    <i x-show="!mobileMenuOpen" data-lucide="menu" class="w-6 h-6"></i>
+                    <i x-show="mobileMenuOpen" data-lucide="x" class="w-6 h-6" x-cloak></i>
+                </button>
+            </div>
+        </div>
+
+        <div x-show="mobileMenuOpen" x-cloak x-transition class="lg:hidden absolute top-full left-0 w-full bg-white dark:bg-legal-blue border-b border-gray-100 dark:border-gray-800 shadow-2xl py-6 px-6 flex flex-col space-y-4">
+            <a href="https://estudioparedesbenedetti.com.ar" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white border-b border-gray-50 dark:border-gray-800 pb-2">Inicio</a>
+            <a href="https://estudioparedesbenedetti.com.ar#servicios" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white border-b border-gray-50 dark:border-gray-800 pb-2">Servicios</a>
+            <a href="https://estudioparedesbenedetti.com.ar#contacto" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white pb-2">Contacto</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero-sucesiones" class="relative w-full min-h-screen flex items-center py-24 md:py-32 overflow-hidden text-center lg:text-left bg-gradient-to-br from-legal-bg to-white dark:from-legal-dark-bg dark:to-legal-blue">
+            <div class="absolute inset-0 z-0 opacity-10 dark:opacity-5">
+                <img src="./pattern-sucesiones.svg" alt="Patrón de Fondo" class="w-full h-full object-cover">
+            </div>
+            <div class="container mx-auto px-4 sm:px-6 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="max-w-4xl mx-auto lg:mx-0 space-y-6 md:space-y-8 animate-slide-up">
+                        <div class="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 border border-legal-gold/30 bg-legal-gold/5 text-legal-gold uppercase tracking-[0.2em] text-[9px] md:text-[10px] font-bold rounded-full mx-auto lg:mx-0">
+                            Proteja su Legado
+                        </div>
+                        <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-legal-blue dark:text-white leading-[1.15] md:leading-tight">
+                            Gestión Integral y Eficiente de <br><span class="text-legal-gold italic">Sucesiones</span>.
+                        </h1>
+                        <p class="text-base md:text-lg text-gray-600 dark:text-gray-400 font-light leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            En momentos delicados, nuestro estudio ofrece asesoramiento experto para la declaratoria de herederos, inscripción de bienes y partición de herencias, garantizando un proceso ágil y transparente en Córdoba.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 md:gap-5 justify-center lg:justify-start pt-4">
+                            <a href="#servicios-sucesiones" class="px-8 md:px-10 py-3.5 md:py-4 bg-legal-gold hover:bg-legal-gold-light text-white font-bold rounded-sm shadow-xl transition-all transform hover:-translate-y-1 text-xs md:text-sm tracking-widest text-center">NUESTROS SERVICIOS</a>
+                        </div>
+                    </div>
+                    <div class="mt-12 lg:mt-0 animate-fade-in delay-300">
+                        <div class="relative group max-w-lg mx-auto lg:max-w-none">
+                            <div class="absolute -inset-4 bg-legal-gold/10 rounded-sm blur-2xl group-hover:bg-legal-gold/20 transition-all duration-700"></div>
+                            <img src="./estudio.png" alt="Estudio Jurídico" class="relative rounded-sm shadow-2xl grayscale hover:grayscale-0 transition-all duration-700 border border-white/10 dark:border-gray-800 w-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicios-sucesiones" class="py-16 md:py-24 bg-white dark:bg-gray-900 transition-colors text-center">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="mb-12 md:mb-16">
+                    <p class="text-legal-gold font-bold uppercase tracking-[0.3em] text-[10px] md:text-xs mb-3 md:mb-4">Nuestra Especialidad</p>
+                    <h2 class="font-serif text-3xl md:text-4xl xl:text-5xl font-bold text-legal-blue dark:text-white leading-tight">Proceso Sucesorio: Claridad y Soporte</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                    <div class="group p-8 md:p-10 bg-legal-bg dark:bg-legal-dark-bg/50 rounded-sm border border-gray-100 dark:border-gray-800 hover:border-legal-gold transition-all duration-500 hover:shadow-xl relative overflow-hidden">
+                        <div class="mb-6 md:mb-8 inline-flex p-3 md:p-4 bg-white dark:bg-gray-800 rounded-full text-legal-gold group-hover:bg-legal-gold group-hover:text-white transition-all duration-300">
+                            <i data-lucide="book-text" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-legal-blue dark:text-white mb-3 md:mb-4">Asesoramiento Inicial</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-xs md:text-sm">
+                            Evaluamos la documentación existente y la situación familiar para trazar la estrategia sucesoria más adecuada.
+                        </p>
+                    </div>
+                    <div class="group p-8 md:p-10 bg-legal-bg dark:bg-legal-dark-bg/50 rounded-sm border border-gray-100 dark:border-gray-800 hover:border-legal-gold transition-all duration-500 hover:shadow-xl relative overflow-hidden">
+                        <div class="mb-6 md:mb-8 inline-flex p-3 md:p-4 bg-white dark:bg-gray-800 rounded-full text-legal-gold group-hover:bg-legal-gold group-hover:text-white transition-all duration-300">
+                            <i data-lucide="gavel" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-legal-blue dark:text-white mb-3 md:mb-4">Declaratoria de Herederos</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-xs md:text-sm">
+                            Impulsamos el trámite judicial para reconocer formalmente a los herederos legítimos del causante.
+                        </p>
+                    </div>
+                    <div class="group p-8 md:p-10 bg-legal-bg dark:bg-legal-dark-bg/50 rounded-sm border border-gray-100 dark:border-gray-800 hover:border-legal-gold transition-all duration-500 hover:shadow-xl relative overflow-hidden">
+                        <div class="mb-6 md:mb-8 inline-flex p-3 md:p-4 bg-white dark:bg-gray-800 rounded-full text-legal-gold group-hover:bg-legal-gold group-hover:text-white transition-all duration-300">
+                            <i data-lucide="wallet" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-legal-blue dark:text-white mb-3 md:mb-4">Partición y Adjudicación</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-xs md:text-sm">
+                            Gestionamos la división y asignación de los bienes de la herencia entre los herederos, evitando conflictos.
+                        </p>
+                    </div>
+                     <div class="group p-8 md:p-10 bg-legal-bg dark:bg-legal-dark-bg/50 rounded-sm border border-gray-100 dark:border-gray-800 hover:border-legal-gold transition-all duration-500 hover:shadow-xl relative overflow-hidden">
+                        <div class="mb-6 md:mb-8 inline-flex p-3 md:p-4 bg-white dark:bg-gray-800 rounded-full text-legal-gold group-hover:bg-legal-gold group-hover:text-white transition-all duration-300">
+                            <i data-lucide="building-2" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-legal-blue dark:text-white mb-3 md:mb-4">Inscripción de Bienes</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-xs md:text-sm">
+                            Realizamos la inscripción de inmuebles, vehículos y otros activos a nombre de los nuevos titulares.
+                        </p>
+                    </div>
+                    <div class="group p-8 md:p-10 bg-legal-bg dark:bg-legal-dark-bg/50 rounded-sm border border-gray-100 dark:border-gray-800 hover:border-legal-gold transition-all duration-500 hover:shadow-xl relative overflow-hidden">
+                        <div class="mb-6 md:mb-8 inline-flex p-3 md:p-4 bg-white dark:bg-gray-800 rounded-full text-legal-gold group-hover:bg-legal-gold group-hover:text-white transition-all duration-300">
+                            <i data-lucide="banknote" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-legal-blue dark:text-white mb-3 md:mb-4">Planificación Fiscal Sucesoria</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-xs md:text-sm">
+                            Asesoramiento sobre impuestos y tasas sucesorias para optimizar la carga fiscal de la herencia.
+                        </p>
+                    </div>
+                    <div class="group p-8 md:p-10 bg-legal-bg dark:bg-legal-dark-bg/50 rounded-sm border border-gray-100 dark:border-gray-800 hover:border-legal-gold transition-all duration-500 hover:shadow-xl relative overflow-hidden">
+                        <div class="mb-6 md:mb-8 inline-flex p-3 md:p-4 bg-white dark:bg-gray-800 rounded-full text-legal-gold group-hover:bg-legal-gold group-hover:text-white transition-all duration-300">
+                            <i data-lucide="users" class="w-5 h-5 md:w-6 md:h-6"></i>
+                        </div>
+                        <h3 class="font-serif text-xl md:text-2xl font-bold text-legal-blue dark:text-white mb-3 md:mb-4">Conflictos Sucesorios</h3>
+                        <p class="text-gray-600 dark:text-gray-400 leading-relaxed text-xs md:text-sm">
+                            Mediación y representación legal en disputas entre herederos para buscar soluciones armónicas.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacto-sucesiones" class="py-16 md:py-24 bg-legal-blue text-white overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+                    <div class="space-y-8 md:space-y-12 text-center lg:text-left">
+                        <h2 class="font-serif text-4xl md:text-5xl font-bold leading-tight">Agilice su Trámite <br class="hidden sm:block"/><span class="text-legal-gold italic">Sucesorio</span></h2>
+                        <p class="text-gray-400 leading-relaxed text-sm md:text-base max-w-xl mx-auto lg:mx-0">
+                            Complete el formulario o agende un turno para una primera consulta. Le ayudaremos a transitar este proceso con tranquilidad y eficiencia.
+                        </p>
+                        <div class="space-y-6 md:space-y-8 text-gray-400 text-sm md:text-base">
+                            <div class="flex flex-col sm:flex-row items-center gap-4 lg:gap-6 justify-center lg:justify-start">
+                                <div class="p-3 rounded-full bg-white/5 text-legal-gold shrink-0"><i data-lucide="phone" class="w-5 h-5"></i></div>
+                                <span>+54 9 351 306-0524</span>
+                            </div>
+                            <div class="flex flex-col sm:flex-row items-center gap-4 lg:gap-6 justify-center lg:justify-start">
+                                <div class="p-3 rounded-full bg-white/5 text-legal-gold shrink-0"><i data-lucide="mail" class="w-5 h-5"></i></div>
+                                <span class="break-all">iparedesbenedetti@gmail.com</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div x-data="contactForm()" class="bg-white dark:bg-gray-800 p-1.5 md:p-2 rounded-sm shadow-2xl text-gray-800 dark:text-white">
+                        <div class="flex p-1 bg-gray-100 dark:bg-gray-900 rounded-sm mb-4 md:mb-6">
+                            <button @click="activeTab = 'message'" class="flex-1 py-3 md:py-4 text-[10px] md:text-xs font-bold tracking-widest uppercase rounded-sm transition-all" :class="activeTab === 'message' ? 'bg-white dark:bg-gray-700 shadow-md text-legal-blue dark:text-white' : 'text-gray-400'">CONSULTA DIRECTA</button>
+                            <button @click="activeTab = 'calendar'" class="flex-1 py-3 md:py-4 text-[10px] md:text-xs font-bold tracking-widest uppercase rounded-sm transition-all" :class="activeTab === 'calendar' ? 'bg-white dark:bg-gray-700 shadow-md text-legal-blue dark:text-white' : 'text-gray-400'">AGENDAR TURNO</button>
+                        </div>
+                        
+                        <div class="p-4 md:p-6 text-left">
+                            <div x-show="activeTab === 'message'" class="space-y-4 md:space-y-5">
+                                <form action="https://formsubmit.co/iparedesbenedetti@gmail.com" method="POST" class="space-y-4 md:space-y-5">
+                                    <input type="hidden" name="_next" value="https://estudioparedesbenedetti.com.ar/gracias.html">
+                                    <input type="hidden" name="_captcha" value="false">
+                                    <input type="hidden" name="_template" value="table">
+                                    <input type="hidden" name="_subject" value="Nueva Consulta Web - Área Sucesiones">
+
+                                    <div class="space-y-4">
+                                        <input type="text" name="Nombre" required x-model="formData.name" class="w-full px-4 py-3 md:py-4 border-b bg-transparent outline-none dark:border-gray-700 focus:border-legal-gold text-sm md:text-base transition-colors" placeholder="Nombre Completo" />
+                                        <input type="email" name="Email" required x-model="formData.email" class="w-full px-4 py-3 md:py-4 border-b bg-transparent outline-none dark:border-gray-700 focus:border-legal-gold text-sm md:text-base transition-colors" placeholder="Email" />
+                                        <input type="tel" name="Telefono" required x-model="formData.phone" class="w-full px-4 py-3 md:py-4 border-b bg-transparent outline-none dark:border-gray-700 focus:border-legal-gold text-sm md:text-base transition-colors" placeholder="Teléfono" />
+                                    </div>
+                                    <textarea name="Mensaje" rows="4" required x-model="formData.message" class="w-full px-4 py-3 border bg-gray-50 dark:bg-gray-900 outline-none resize-none dark:border-gray-700 focus:border-legal-gold text-sm md:text-base transition-all" placeholder="Detalle brevemente su consulta sucesoria..."></textarea>
+                                    <button type="submit" class="w-full py-4 md:py-5 bg-legal-blue dark:bg-legal-gold text-white font-bold tracking-widest uppercase shadow-xl hover:bg-black transition-all text-xs md:text-sm">
+                                        ENVIAR CONSULTA
+                                    </button>
+                                </form>
+                            </div>
+                            <div x-show="activeTab === 'calendar'" class="w-full" x-cloak>
+                                <div class="calendly-inline-widget w-full" data-url="https://calendly.com/iparedesbenedetti" style="height:500px; min-width: 100%;"></div>
+                                <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-legal-blue text-white py-12 md:py-16 border-t border-white/5 text-center px-4">
+        <div class="container mx-auto">
+            <a href="https://estudioparedesbenedetti.com.ar" class="w-12 h-12 bg-legal-gold rounded-sm flex items-center justify-center text-white font-serif font-bold text-xl mx-auto mb-6 hover:scale-105 transition-transform">PB</a>
+            <p class="text-xs md:text-sm uppercase tracking-[0.3em] text-gray-500 font-bold mb-4">Paredes Benedetti & Asociados</p>
+            <p class="text-[10px] md:text-xs text-gray-600 tracking-widest">
+                &copy; <span x-text="new Date().getFullYear()"></span> TODOS LOS DERECHOS RESERVADOS. CÓRDOBA, ARGENTINA.
+            </p>
+            <div class="pt-8 flex justify-center">
+                <a href="https://www.abogado.org.ar/aranceles.php" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 px-6 py-3 bg-white/5 border border-legal-gold/30 hover:bg-legal-gold/10 text-legal-gold rounded-sm transition-all group max-w-xs text-center text-xs">
+                    <i data-lucide="external-link" class="w-4 h-4 group-hover:scale-110 transition-transform shrink-0"></i>
+                    <span class="font-bold tracking-widest uppercase">Honorarios Colegio de Abogados de Córdoba</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5493513060524" target="_blank" class="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-50 bg-[#25D366] text-white p-3.5 md:p-4 rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-transform" aria-label="WhatsApp">
+        <i data-lucide="message-circle" class="w-6 h-6 md:w-8 md:h-8 fill-white"></i>
+    </a>
+
+    <script>
+        window.addEventListener('load', () => lucide.createIcons());
+        document.addEventListener('alpine:initialized', () => lucide.createIcons());
+    </script>
 </body>
 </html>
