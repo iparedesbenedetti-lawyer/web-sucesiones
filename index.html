@@ -116,6 +116,9 @@
             </nav>
 
             <div class="lg:hidden flex items-center gap-2">
+                <a href="https://estudioparedesbenedetti.com.ar" class="w-9 h-9 bg-legal-gold text-white flex items-center justify-center rounded-sm shadow-md active:scale-95 transition-transform" aria-label="Volver al inicio">
+                    <i data-lucide="home" class="w-5 h-5"></i>
+                </a>
                 <button @click="darkMode = !darkMode" class="text-legal-blue dark:text-legal-gold p-2" aria-label="Cambiar tema">
                     <i x-show="!darkMode" data-lucide="moon" class="w-5 h-5"></i>
                     <i x-show="darkMode" data-lucide="sun" class="w-5 h-5" x-cloak></i>
@@ -128,7 +131,7 @@
         </div>
 
         <div x-show="mobileMenuOpen" x-cloak x-transition class="lg:hidden absolute top-full left-0 w-full bg-white dark:bg-legal-blue border-b border-gray-100 dark:border-gray-800 shadow-2xl py-6 px-6 flex flex-col space-y-4">
-            <a href="https://estudioparedesbenedetti.com.ar" @click="mobileMenuOpen = false" class="text-sm font-bold bg-legal-gold text-white py-3 px-4 rounded-sm text-center tracking-widest uppercase mb-2">VOLVER A PAREDES BENEDETTI</a>
+            <a href="https://estudioparedesbenedetti.com.ar" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white border-b border-gray-50 dark:border-gray-800 pb-2">Inicio</a>
             <a href="https://estudioparedesbenedetti.com.ar#servicios" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white border-b border-gray-50 dark:border-gray-800 pb-2">Servicios</a>
             <a href="https://estudioparedesbenedetti.com.ar#contacto" @click="mobileMenuOpen = false" class="text-lg font-serif font-bold text-legal-blue dark:text-white pb-2">Contacto</a>
         </div>
